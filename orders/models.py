@@ -11,7 +11,7 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    promocode = models.ForeignKey("promocodes.Promocode", on_delete=models.SET_NULL, null=True, blank=True)
+    promo_code = models.ForeignKey("promocodes.Promocode", on_delete=models.SET_NULL, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     total_discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)

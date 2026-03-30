@@ -12,6 +12,6 @@ class Promocode(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 class PromocodeUsage(models.Model):
-    promocode = models.ForeignKey(Promocode, on_delete=models.CASCADE)
+    promo_code = models.ForeignKey(Promocode, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     used_at = models.DateTimeField(auto_now_add=True)
