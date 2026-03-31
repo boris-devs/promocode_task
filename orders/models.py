@@ -8,7 +8,7 @@ class OrderItem(models.Model):
     good = models.ForeignKey("goods.Good", on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     price_at_purchase = models.DecimalField(max_digits=10, decimal_places=2)
-    discount_amount = models.IntegerField(name="discount in percent", default=0,
+    discount_amount = models.IntegerField(default=0,
                                           validators=[MinValueValidator(0), MaxValueValidator(100)])
 
 
