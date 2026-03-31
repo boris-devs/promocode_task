@@ -4,7 +4,7 @@ from django.db import models
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey("orders.Order", on_delete=models.CASCADE)
+    order = models.ForeignKey("orders.Order", on_delete=models.CASCADE, related_name="items")
     good = models.ForeignKey("goods.Good", on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     price_at_purchase = models.DecimalField(max_digits=10, decimal_places=2)
