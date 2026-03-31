@@ -14,3 +14,6 @@ class Good(models.Model):
     quantity = models.PositiveIntegerField()
     is_promo_allowed = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name + " " + str(self.price) +"$" + " " + str(self.quantity) + " quantity"
