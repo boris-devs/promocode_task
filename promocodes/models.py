@@ -1,12 +1,13 @@
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.db import models
-
 from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
 
 
 class Promocode(models.Model):
     code = models.CharField(max_length=255)
-    discount = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    discount = models.IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(100)]
+    )
     quantity = models.PositiveIntegerField()
     expiration_date = models.DateTimeField()
     active = models.BooleanField(default=True)
@@ -14,7 +15,8 @@ class Promocode(models.Model):
         "goods.Category",
         blank=True,
         related_name="promocodes",
-        help_text="Categories for which the promocode is valid")
+        help_text="Categories for which the promocode is valid",
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
 

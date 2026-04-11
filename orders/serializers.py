@@ -13,7 +13,9 @@ class OrderGoodsCreateRequestSerializer(serializers.Serializer):
 
 class OrderGoodsResponseSerializer(serializers.ModelSerializer):
     good_id = serializers.IntegerField(read_only=True)
-    price = serializers.DecimalField(source="price_at_purchase", max_digits=10, decimal_places=2, read_only=True)
+    price = serializers.DecimalField(
+        source="price_at_purchase", max_digits=10, decimal_places=2, read_only=True
+    )
     discount = serializers.SerializerMethodField()
     total = serializers.SerializerMethodField()
 
@@ -37,7 +39,7 @@ class OrderGoodsResponseSerializer(serializers.ModelSerializer):
 class OrderCreateRequestSerializer(serializers.ModelSerializer):
     goods = OrderGoodsCreateRequestSerializer(many=True)
     promo_code = serializers.CharField(required=False, allow_blank=True)
-    user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), source="user")
+    user_id = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
 
     class Meta:
         model = Order
@@ -48,9 +50,13 @@ class OrderCreateResponseSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(read_only=True)
     order_id = serializers.IntegerField(source="id", read_only=True)
     goods = OrderGoodsResponseSerializer(source="items", many=True, read_only=True)
-    price = serializers.DecimalField(source="total_price", max_digits=10, decimal_places=2, read_only=True)
+    price = serializers.DecimalField(
+        source="total_price", max_digits=10, decimal_places=2, read_only=True
+    )
     discount = serializers.SerializerMethodField()
-    total = serializers.DecimalField(source="final_price", max_digits=10, decimal_places=2, read_only=True)
+    total = serializers.DecimalField(
+        source="final_price", max_digits=10, decimal_places=2, read_only=True
+    )
 
     class Meta:
         model = Order

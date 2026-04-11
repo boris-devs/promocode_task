@@ -1,5 +1,5 @@
-from decimal import Decimal
 from datetime import timedelta
+from decimal import Decimal
 
 from django.test import TestCase
 from django.utils import timezone
@@ -120,4 +120,8 @@ class OrderServiceTests(TestCase):
 
         self.promo.refresh_from_db()
         self.assertEqual(self.promo.quantity, 1)
-        self.assertTrue(PromocodeUsage.objects.filter(promo_code=self.promo, user=self.user).exists())
+        self.assertTrue(
+            PromocodeUsage.objects.filter(
+                promo_code=self.promo, user=self.user
+            ).exists()
+        )
